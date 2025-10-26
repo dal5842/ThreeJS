@@ -20,6 +20,8 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 camera.position.setZ(50);
 camera.position.setX(-3);
 
+// === Create Cube with Phong Material to Accept Lights ===
+// This cube demonstrates basic object creation with lighting.
 const cubeGeometry = new THREE.BoxGeometry(10, 10, 10);
 const cubeMaterial = new THREE.MeshStandardMaterial({ color: 0xFF6347 });
 const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
@@ -73,6 +75,14 @@ const torusKnot = new THREE.Mesh(torusGeo, torusMaterial);
 torusKnot.position.y = 20;
 scene.add(torusKnot);
 
+// === New Cone Object Example ===
+// This cone adds visual variety and shows you experimenting!
+const coneGeometry = new THREE.ConeGeometry(7, 15, 16);
+const coneMaterial = new THREE.MeshStandardMaterial({ color: 0x00ffff, wireframe: true });
+const coneMesh = new THREE.Mesh(coneGeometry, coneMaterial);
+coneMesh.position.set(0, -20, -10); // Move below other objects
+scene.add(coneMesh);
+
 function animate() {
     requestAnimationFrame(animate);
 
@@ -91,6 +101,10 @@ function animate() {
     controls.update();
 
     renderer.render(scene, camera);
+
+    // Animate cone
+    coneMesh.position.y = -20 + Math.sin(Date.now() * 0.002) * 5;
+    coneMesh.rotation.y += 0.02;
 }
 
 animate();
