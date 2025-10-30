@@ -83,6 +83,20 @@ const coneMesh = new THREE.Mesh(coneGeometry, coneMaterial);
 coneMesh.position.set(0, -20, -10); // Move below other objects
 scene.add(coneMesh);
 
+// === New Glowing Torus Shape ===
+// This torus glows and orbits around the smile sphere for testing.
+const torusGeometry = new THREE.TorusGeometry(15, 1, 16, 100);
+const torusMaterial = new THREE.MeshStandardMaterial({
+    color: 0xffff00,
+    emissive: 0xffa500,
+    emissiveIntensity: 0.8,
+    metalness: 0.5,
+    roughness: 0.2
+});
+const torusMesh = new THREE.Mesh(torusGeometry, torusMaterial);
+torusMesh.position.set(0, 0, -10);
+scene.add(torusMesh);
+
 function animate() {
     requestAnimationFrame(animate);
 
@@ -105,6 +119,10 @@ function animate() {
     // Animate cone
     coneMesh.position.y = -20 + Math.sin(Date.now() * 0.002) * 5;
     coneMesh.rotation.y += 0.02;
+
+    // Animate glowing torus
+    torusMesh.rotation.x += 0.01;
+    torusMesh.rotation.y += 0.02;
 }
 
 animate();
